@@ -36,7 +36,11 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
     }
 
     async findMany(): Promise<Movie[]> {
-        const movies = await prisma.movie.findMany();
+        const movies = await prisma.movie.findMany({
+            include: {
+                reviews: true,
+            },
+        });
 
         return movies
     }
@@ -45,6 +49,9 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
         const movie = await prisma.movie.findUnique({
             where: {
                 id: movieId
+            },
+            include: {
+                reviews: true,
             },
         });
 

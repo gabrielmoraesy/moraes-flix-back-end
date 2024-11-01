@@ -41,6 +41,7 @@ model Review {
   rating    Int     
   comment   String? 
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   // Foreign keys
   userId    String
