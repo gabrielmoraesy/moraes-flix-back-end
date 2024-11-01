@@ -6,3 +6,46 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  createdAt     DateTime @default(now())
+
+  // Relations
+  reviews       Review[]
+
+  @@map("users")
+}
+
+model Movie {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  genre       String
+  releaseYear Int
+  duration    Int
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  reviews     Review[]
+
+  @@map("movies")
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int     
+  comment   String? 
+  createdAt DateTime @default(now())
+
+  // Foreign keys
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  movieId   String
+  movie     Movie    @relation(fields: [movieId], references: [id])
+
+  @@map("reviews")
+}
