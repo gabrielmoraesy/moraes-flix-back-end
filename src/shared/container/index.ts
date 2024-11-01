@@ -6,3 +6,4 @@ container.registerSingleton<IMoviesRepository>(
     "MoviesRepositoryInMemory",
     MoviesRepositoryInMemory
 )
+
