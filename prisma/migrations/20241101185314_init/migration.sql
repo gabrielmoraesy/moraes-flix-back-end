@@ -18,7 +18,7 @@ CREATE TABLE "movies" (
     "releaseYear" INTEGER NOT NULL,
     "duration" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "movies_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +29,7 @@ CREATE TABLE "reviews" (
     "rating" INTEGER NOT NULL,
     "comment" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT NOT NULL,
     "movieId" TEXT NOT NULL,
 

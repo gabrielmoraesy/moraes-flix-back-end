@@ -1,3 +1,6 @@
+import { UsersRepositoryInMemory } from "@/modules/auth/repositories/in-memory/UsersRepositoryInMemory";
+import { IUsersRepository } from "@/modules/auth/repositories/IUsersRepository.ts";
+import { RegisterUserUseCase } from "@/modules/auth/useCases/registerUser/RegisterUserUseCase";
 import { IMoviesRepository } from "@/modules/movies/repositories/IMoviesRepository";
 import { MoviesRepositoryInMemory } from "@/modules/movies/repositories/in-memory/MoviesRepositoryInMemory";
 import { ReviewsRepositoryInMemory } from "@/modules/reviews/repositories/in-memory/ReviewsRepositoryInMemory";
@@ -14,6 +17,11 @@ container.registerSingleton<IReviewsRepository>(
     ReviewsRepositoryInMemory
 )
 
+container.registerSingleton<IUsersRepository>(
+    "UsersRepositoryInMemory",
+    UsersRepositoryInMemory
+)
 
+container.registerSingleton("RegisterUserUseCase", RegisterUserUseCase);
 
 
