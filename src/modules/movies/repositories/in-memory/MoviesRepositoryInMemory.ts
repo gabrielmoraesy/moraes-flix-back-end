@@ -1,4 +1,3 @@
-import { ICreateMovieDTO } from "../../dtos/ICreateMovieDTO";
 import { Movie, PrismaClient } from "@prisma/client";
 import { IMoviesRepository } from "../IMoviesRepository";
 import { IUpdateMovie, IUpdateMovieDTO } from "../../dtos/IUpdateMovieDTO";
@@ -11,7 +10,8 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
         description,
         genre,
         releaseYear,
-        duration
+        duration,
+        userId,
     }: ICreateMovieDTO): Promise<Movie> {
         const movie = await prisma.movie.create({
             data: {
@@ -20,7 +20,7 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
                 genre,
                 releaseYear,
                 duration,
-                createdAt: new Date(),
+                userId,
             },
         });
 
@@ -39,10 +39,16 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
         const movies = await prisma.movie.findMany({
             include: {
                 reviews: true,
+                user: {
+                    select: {
+                        name: true,
+                        email: true,
+                    },
+                },
             },
         });
 
-        return movies
+        return movies;
     }
 
     async findById(movieId: string): Promise<Movie | null> {
@@ -52,6 +58,12 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
             },
             include: {
                 reviews: true,
+                user: {
+                    select: {
+                        name: true,
+                        email: true,
+                    },
+                },
             },
         });
 

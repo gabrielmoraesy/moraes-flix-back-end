@@ -5,11 +5,12 @@ interface JwtPayload {
     userId: string;
 }
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction): void => {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
-        return res.status(401).json({ message: "Access denied" });
+        res.status(401).json({ message: "Access denied" });
+        return;
     }
 
     try {
@@ -18,6 +19,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
         next();
     } catch (error) {
         res.status(403).json({ message: "Invalid token" });
+        return;
     }
 };
 

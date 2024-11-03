@@ -11,7 +11,7 @@ class AuthenticateUserUseCase {
         private authenticateRepository: IUsersRepository,
     ) { }
 
-    async execute({ email, password }: ILoginUserDTO): Promise<string> {
+    async execute({ email, password }: ILoginUserDTO): Promise<{ token: string; user: { email: string; name: string } }> {
         const user = await this.authenticateRepository.findByEmail(email);
 
         if (!user || !(await bcrypt.compare(password, user.password_hash))) {
@@ -22,7 +22,7 @@ class AuthenticateUserUseCase {
             expiresIn: "1h",
         });
 
-        return token;
+        return { token, user: { email: user.email, name: user.name } };
     }
 }
 

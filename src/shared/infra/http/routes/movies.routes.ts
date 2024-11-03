@@ -4,6 +4,7 @@ import { ListMovieController } from "@/modules/movies/useCases/listMovie/ListMov
 import { ListMoviesController } from "@/modules/movies/useCases/listMovies/ListMoviesController";
 import { UpdateMovieController } from "@/modules/movies/useCases/updateMovie/UpdateMovieController";
 import { Router, Request, Response, NextFunction } from "express";
+import { authMiddleware } from "../middlewares/auth";
 
 const moviesRoutes = Router();
 
@@ -13,23 +14,23 @@ const listMoviesController = new ListMoviesController();
 const listMovieController = new ListMovieController();
 const updateMovieController = new UpdateMovieController();
 
-moviesRoutes.post("/", (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.post("/", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
     createMovieController.handle(request, response).catch(next);
 });
 
-moviesRoutes.delete("/:id", (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.delete("/:id", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
     deleteMovieController.handle(request, response).catch(next);
 });
 
-moviesRoutes.get("/", (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.get("/", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
     listMoviesController.handle(request, response).catch(next);
 });
 
-moviesRoutes.get("/:id", (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.get("/:id", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
     listMovieController.handle(request, response).catch(next);
 });
 
-moviesRoutes.patch("/:id", (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.patch("/:id", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
     updateMovieController.handle(request, response).catch(next);
 });
 

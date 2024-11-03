@@ -16,24 +16,28 @@ model User {
 
   // Relations
   reviews       Review[]
+  movies        Movie[]  
 
   @@map("users")
 }
 
 model Movie {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  genre       String
-  releaseYear Int
-  duration    Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  
-  // Relations
-  reviews     Review[]
+    id          String   @id @default(uuid())
+    title       String
+    description String
+    genre       String
+    releaseYear Int
+    duration    Int
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 
-  @@map("movies")
+    // Relations
+    reviews     Review[]
+
+    userId      String
+    user        User     @relation(fields: [userId], references: [id])
+
+    @@map("movies")
 }
 
 model Review {

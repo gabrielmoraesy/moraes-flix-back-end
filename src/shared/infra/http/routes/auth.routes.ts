@@ -1,4 +1,3 @@
-// auth/routes/authRoutes.ts
 import { AuthenticateUserController } from "@/modules/auth/useCases/authenticateUser/AuthenticateUserController";
 import { RegisterUserController } from "@/modules/auth/useCases/registerUser/RegisterUserController";
 import { NextFunction, Request, Response, Router } from "express";

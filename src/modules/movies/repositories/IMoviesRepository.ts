@@ -1,4 +1,3 @@
-import { ICreateMovieDTO } from "../dtos/ICreateMovieDTO";
 import { Movie } from "@prisma/client";
 import { IUpdateMovieDTO } from "../dtos/IUpdateMovieDTO";
 

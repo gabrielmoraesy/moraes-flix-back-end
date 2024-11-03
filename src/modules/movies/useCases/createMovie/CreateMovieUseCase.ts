@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 import { IMoviesRepository } from "../../repositories/IMoviesRepository";
-import { ICreateMovieDTO } from "../../dtos/ICreateMovieDTO";
 import { Movie } from "@prisma/client";
 
 interface IRequest {
@@ -9,6 +8,7 @@ interface IRequest {
     genre: string;
     releaseYear: number;
     duration: number;
+    userId: string
 }
 
 @injectable()
@@ -19,7 +19,7 @@ class CreateMovieUseCase {
     ) { }
 
     async execute({
-        title, description, genre, releaseYear, duration
+        title, description, genre, releaseYear, duration, userId
     }: IRequest): Promise<Movie> {
         const movieData: ICreateMovieDTO = {
             title,
@@ -27,12 +27,14 @@ class CreateMovieUseCase {
             genre,
             releaseYear,
             duration,
+            userId,
         };
 
         const movie = await this.moviesRepository.create(movieData);
 
         return movie;
     }
+
 }
 
 export { CreateMovieUseCase };
