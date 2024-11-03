@@ -1,9 +1,10 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { ILoginUserDTO } from "../../dtos/ILoginUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository.ts";
 
+@injectable()
 class AuthenticateUserUseCase {
     constructor(
         @inject("UsersRepositoryInMemory")

@@ -22,6 +22,4 @@ container.registerSingleton<IUsersRepository>(
     UsersRepositoryInMemory
 )
 
-container.registerSingleton("RegisterUserUseCase", RegisterUserUseCase);
-
 

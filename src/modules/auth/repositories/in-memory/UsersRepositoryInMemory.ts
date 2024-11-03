@@ -1,25 +1,26 @@
-import { User } from "@prisma/client";
+import { Prisma, PrismaClient, User } from "@prisma/client";
 import { IAuthenticateUserDTO } from "../../dtos/IAuthenticateUserDTO";
-import { v4 as uuidv4 } from "uuid";
 import { IUsersRepository } from "../IUsersRepository.ts";
 
+const prisma = new PrismaClient();
 class UsersRepositoryInMemory implements IUsersRepository {
-    private users: User[] = [];
-
     async create({ email, password, name }: IAuthenticateUserDTO): Promise<User> {
-        const user: User = {
-            id: uuidv4(),
-            email,
-            name,
-            password_hash: password,
-            createdAt: new Date(),
-        };
-        this.users.push(user);
+        const user = await prisma.user.create({
+            data: {
+                email,
+                name,
+                password_hash: password,
+            },
+        });
         return user;
     }
 
     async findByEmail(email: string): Promise<User | null> {
-        return this.users.find((user) => user.email === email) || null;
+        return await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
     }
 }
 
