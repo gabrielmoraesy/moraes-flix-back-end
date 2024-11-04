@@ -10,9 +10,13 @@ class CreateReviewUseCase {
         private reviewsRepository: IReviewsRepository,
     ) { }
 
-    async execute({
-        rating, comment, userId, movieId
-    }: ICreateReviewDTO): Promise<Review> {
+    async execute({ rating, comment, userId, movieId }: ICreateReviewDTO): Promise<Review> {
+        const existingReview = await this.reviewsRepository.findReviewByUserAndMovie(userId, movieId);
+
+        if (existingReview) {
+            throw new Error("Usuário já fez uma avaliação para este filme.");
+        }
+
         const reviewData: ICreateReviewDTO = {
             rating, comment, userId, movieId
         };
@@ -24,4 +28,3 @@ class CreateReviewUseCase {
 }
 
 export { CreateReviewUseCase };
-

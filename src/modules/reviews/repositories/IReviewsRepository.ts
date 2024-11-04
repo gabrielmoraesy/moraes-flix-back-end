@@ -4,9 +4,9 @@ import { IUpdateReviewDTO } from "../dtos/IUpdateReviewDTO";
 
 interface IReviewsRepository {
     create(data: ICreateReviewDTO): Promise<Review>;
-    delete(reviewId: string): Promise<Review>
-    update(reviewId: string, uptatedReview: IUpdateReviewDTO): Promise<Review>
+    delete(reviewId: string): Promise<Review>;
+    update(reviewId: string, updatedReview: IUpdateReviewDTO): Promise<Review>;
+    findReviewByUserAndMovie(userId: string, movieId: string): Promise<Review | null>;
 }
 
 export { IReviewsRepository };
-
