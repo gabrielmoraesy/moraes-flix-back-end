@@ -11,18 +11,18 @@ class AuthenticateUserUseCase {
         private authenticateRepository: IUsersRepository,
     ) { }
 
-    async execute({ email, password }: ILoginUserDTO): Promise<{ token: string; user: { email: string; name: string } }> {
+    async execute({ email, password }: ILoginUserDTO): Promise<{ token: string; user: IUser }> {
         const user = await this.authenticateRepository.findByEmail(email);
 
         if (!user || !(await bcrypt.compare(password, user.password_hash))) {
-            throw new Error("Invalid email or password");
+            throw new Error("Email ou senha estão incorretos");
         }
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
             expiresIn: "1h",
         });
 
-        return { token, user: { email: user.email, name: user.name } };
+        return { token, user: { id: user.id, email: user.email, name: user.name } };
     }
 }
 

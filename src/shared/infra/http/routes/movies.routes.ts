@@ -22,7 +22,7 @@ moviesRoutes.delete("/:id", authMiddleware, (request: Request, response: Respons
     deleteMovieController.handle(request, response).catch(next);
 });
 
-moviesRoutes.get("/", authMiddleware, (request: Request, response: Response, next: NextFunction) => {
+moviesRoutes.get("/", (request: Request, response: Response, next: NextFunction) => {
     listMoviesController.handle(request, response).catch(next);
 });
 

@@ -22,6 +22,15 @@ class ReviewsRepositoryInMemory implements IReviewsRepository {
                 movie: {
                     connect: { id: movieId }
                 }
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true
+                    }
+                }
             }
         });
 

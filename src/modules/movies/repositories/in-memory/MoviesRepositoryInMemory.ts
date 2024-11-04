@@ -57,7 +57,17 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
                 id: movieId
             },
             include: {
-                reviews: true,
+                reviews: {
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                name: true,
+                                email: true,
+                            },
+                        },
+                    },
+                },
                 user: {
                     select: {
                         name: true,
@@ -69,6 +79,7 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
 
         return movie;
     }
+
 
     async update(movieId: string, updatedMovie: IUpdateMovieDTO): Promise<Movie> {
         const movie = await prisma.movie.update({
