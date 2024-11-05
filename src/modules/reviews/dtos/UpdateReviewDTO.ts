@@ -1,4 +1,4 @@
-export interface IUpdateReviewDTO {
+export interface UpdateReviewDTO {
     rating: number;
     comment?: string
 }

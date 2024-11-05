@@ -1,4 +1,4 @@
-export interface IMovieDTO {
+export interface MovieDTO {
     id: string
     title: string
     description: string

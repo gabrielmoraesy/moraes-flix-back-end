@@ -1,13 +1,21 @@
-// Importações
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { z } from "zod";
 import { UpdateReviewUseCase } from "./UpdateReviewUseCase";
-import { IUpdateReviewDTO } from "../../dtos/IUpdateReviewDTO";
 
 class UpdateReviewController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { reviewId } = request.params
-        const updatedReview = request.body as IUpdateReviewDTO
+        const createParamsReviewSchema = z.object({
+            reviewId: z.string()
+        })
+
+        const createBodyReviewSchema = z.object({
+            rating: z.number(),
+            comment: z.string()
+        })
+
+        const { reviewId } = createParamsReviewSchema.parse(request.params);
+        const updatedReview = createBodyReviewSchema.parse(request.body);
 
         const updateReviewUseCase = container.resolve(UpdateReviewUseCase);
 

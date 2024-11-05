@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { IMoviesRepository } from "../../repositories/IMoviesRepository";
+import { IMoviesRepository } from "../../infra/prisma/repositories/IMoviesRepository";
 import { Movie } from "@prisma/client";
 
 interface IRequest {
@@ -14,14 +14,14 @@ interface IRequest {
 @injectable()
 class CreateMovieUseCase {
     constructor(
-        @inject("MoviesRepositoryInMemory")
+        @inject("PrismaMoviesRepository")
         private moviesRepository: IMoviesRepository,
     ) { }
 
     async execute({
         title, description, genre, releaseYear, duration, userId
     }: IRequest): Promise<Movie> {
-        const movieData: ICreateMovieDTO = {
+        const movieData: CreateMovieDTO = {
             title,
             description,
             genre,

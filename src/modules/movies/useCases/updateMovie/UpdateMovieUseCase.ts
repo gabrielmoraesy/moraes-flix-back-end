@@ -1,19 +1,19 @@
 import { inject, injectable } from "tsyringe";
-import { IMoviesRepository } from "../../repositories/IMoviesRepository";
+import { IMoviesRepository } from "../../infra/prisma/repositories/IMoviesRepository";
 import { Movie } from "@prisma/client";
-import { IUpdateMovieDTO } from "../../dtos/IUpdateMovieDTO";
+import { UpdateMovieDTO } from "../../dtos/UpdateMovieDTO";
 
 interface IRequest {
     id: string;
-    updatedMovie: IUpdateMovieDTO
+    updatedMovie: UpdateMovieDTO
 }
 
-type UpdateMovieData = IUpdateMovieDTO & { updatedAt: Date };
+type UpdateMovieData = UpdateMovieDTO & { updatedAt: Date };
 
 @injectable()
 class UpdateMovieUseCase {
     constructor(
-        @inject("MoviesRepositoryInMemory")
+        @inject("PrismaMoviesRepository")
         private moviesRepository: IMoviesRepository,
     ) { }
 

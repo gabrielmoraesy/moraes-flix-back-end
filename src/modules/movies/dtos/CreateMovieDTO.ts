@@ -1,4 +1,4 @@
-interface ICreateMovieDTO {
+interface CreateMovieDTO {
     title: string;
     description: string;
     genre: string;

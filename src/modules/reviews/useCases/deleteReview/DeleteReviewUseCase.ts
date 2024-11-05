@@ -1,18 +1,18 @@
 import { Review } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
-import { IDeleteReviewDTO } from "../../dtos/IDeleteReviewDTO";
-import { IReviewsRepository } from "../../repositories/IReviewsRepository";
+import { DeleteReviewDTO } from "../../dtos/DeleteReviewDTO";
+import { IReviewsRepository } from "../../infra/prisma/repositories/IReviewsRepository";
 
 @injectable()
 class DeleteReviewUseCase {
     constructor(
-        @inject("ReviewsRepositoryInMemory")
+        @inject("PrismaReviewsRepository")
         private reviewsRepository: IReviewsRepository,
     ) { }
 
     async execute({
         reviewId
-    }: IDeleteReviewDTO): Promise<Review> {
+    }: DeleteReviewDTO): Promise<Review> {
         const review = await this.reviewsRepository.delete(reviewId);
 
         return review;

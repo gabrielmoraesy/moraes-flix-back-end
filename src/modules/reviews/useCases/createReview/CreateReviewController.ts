@@ -1,17 +1,22 @@
-// CreateReviewController.ts
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateReviewUseCase } from "./CreateReviewUseCase";
-
-interface IRequestBody {
-    rating: number;
-    comment?: string;
-}
+import { z } from "zod";
 
 class CreateReviewController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { rating, comment } = request.body as IRequestBody;
-        const { userId, movieId } = request.params;
+        const createParamsReviewSchema = z.object({
+            userId: z.string(),
+            movieId: z.string()
+        })
+
+        const createBodyReviewSchema = z.object({
+            rating: z.number(),
+            comment: z.string()
+        })
+
+        const { userId, movieId } = createParamsReviewSchema.parse(request.params);
+        const { rating, comment } = createBodyReviewSchema.parse(request.body);
 
         const createReviewUseCase = container.resolve(CreateReviewUseCase);
 

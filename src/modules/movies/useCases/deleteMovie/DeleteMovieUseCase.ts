@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { IMoviesRepository } from "../../repositories/IMoviesRepository";
+import { IMoviesRepository } from "../../infra/prisma/repositories/IMoviesRepository";
 import { Movie } from "@prisma/client";
 
 interface IRequest {
@@ -9,7 +9,7 @@ interface IRequest {
 @injectable()
 class DeleteMovieUseCase {
     constructor(
-        @inject("MoviesRepositoryInMemory")
+        @inject("PrismaMoviesRepository")
         private moviesRepository: IMoviesRepository,
     ) { }
 

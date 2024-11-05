@@ -1,4 +1,3 @@
-// Importações
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListMoviesUseCase } from "./ListMoviesUseCase";

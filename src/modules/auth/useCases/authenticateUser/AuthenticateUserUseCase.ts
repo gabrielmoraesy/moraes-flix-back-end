@@ -1,20 +1,21 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { ILoginUserDTO } from "../../dtos/ILoginUserDTO";
-import { IUsersRepository } from "../../repositories/IUsersRepository.ts";
+import { IUsersRepository } from "../../infra/prisma/repositories/IUsersRepository.js";
+import { LoginUserDTO } from "../../dtos/LoginUserDTO.js";
 
 @injectable()
 class AuthenticateUserUseCase {
     constructor(
-        @inject("UsersRepositoryInMemory")
+        @inject("PrismaUsersRepository")
         private authenticateRepository: IUsersRepository,
     ) { }
 
-    async execute({ email, password }: ILoginUserDTO): Promise<{ token: string; user: IUser }> {
+    async execute({ email, password }: LoginUserDTO): Promise<{ token: string; user: UserDTO }> {
         const user = await this.authenticateRepository.findByEmail(email);
+        const isPasswordValid = await bcrypt.compare(password, user!.password_hash)
 
-        if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+        if (!user || !(isPasswordValid)) {
             throw new Error("Email ou senha estão incorretos");
         }
 

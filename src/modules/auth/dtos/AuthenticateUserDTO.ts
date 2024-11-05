@@ -1,4 +1,4 @@
-export interface IAuthenticateUserDTO {
+export interface AuthenticateUserDTO {
     email: string;
     password: string;
     name: string;

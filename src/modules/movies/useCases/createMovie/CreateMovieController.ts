@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateMovieUseCase } from "./CreateMovieUseCase";
+import { z } from "zod";
 
 interface ICreateMovieRequest {
     title: string;
@@ -13,7 +14,16 @@ interface ICreateMovieRequest {
 
 class CreateMovieController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { title, description, genre, releaseYear, duration, userId } = request.body as ICreateMovieRequest;
+        const createBodyMovieSchema = z.object({
+            title: z.string(),
+            description: z.string(),
+            genre: z.string(),
+            releaseYear: z.number(),
+            duration: z.number(),
+            userId: z.string()
+        })
+
+        const { title, description, genre, releaseYear, duration, userId } = createBodyMovieSchema.parse(request.body);
 
         const createMovieUseCase = container.resolve(CreateMovieUseCase);
 

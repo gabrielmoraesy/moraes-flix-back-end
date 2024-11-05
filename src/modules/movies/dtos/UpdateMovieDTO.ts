@@ -1,4 +1,4 @@
-export interface IUpdateMovieDTO {
+export interface UpdateMovieDTO {
     title: string
     description: string
     genre: string
@@ -6,7 +6,7 @@ export interface IUpdateMovieDTO {
     duration: number
 }
 
-export interface IUpdateMovie {
+export interface UpdateMovie {
     title: string
     description: string
     genre: string

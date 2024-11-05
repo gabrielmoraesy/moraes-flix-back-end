@@ -1,11 +1,17 @@
-// RegisterUserController.ts
 import { Request, Response } from "express";
 import { RegisterUserUseCase } from "./RegisterUserUseCase";
 import { container } from "tsyringe";
+import { z } from "zod";
 
 class RegisterUserController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { name, email, password } = request.body;
+        const createBodyUserSchema = z.object({
+            name: z.string(),
+            email: z.string().email(),
+            password: z.string()
+        })
+
+        const { name, email, password } = createBodyUserSchema.parse(request.body);
 
         const registerUserUseCase = container.resolve(RegisterUserUseCase);
 
@@ -17,7 +23,7 @@ class RegisterUserController {
                 return response.status(400).json({ error: error.message });
             }
 
-            return response.status(500).json({ error: "Erro ao registrar o usuário." });
+            return response.status(500).json({ error: `Erro ao registrar o usuário.` });
         }
     }
 }

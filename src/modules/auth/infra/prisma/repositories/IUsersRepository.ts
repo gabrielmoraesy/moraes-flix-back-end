@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
-import { IAuthenticateUserDTO } from "../dtos/IAuthenticateUserDTO";
+import { AuthenticateUserDTO } from "../../../dtos/AuthenticateUserDTO";
 
 export interface IUsersRepository {
-    create(data: IAuthenticateUserDTO): Promise<User>;
+    create(data: AuthenticateUserDTO): Promise<User>;
     findByEmail(email: string): Promise<User | null>;
 }

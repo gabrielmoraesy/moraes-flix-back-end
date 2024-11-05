@@ -1,10 +1,16 @@
 import { Request, Response } from "express";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 import { container } from "tsyringe";
+import { z } from "zod";
 
 class AuthenticateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { email, password } = request.body;
+        const createBodyUserSchema = z.object({
+            email: z.string(),
+            password: z.string()
+        })
+
+        const { email, password } = createBodyUserSchema.parse(request.body);
 
         try {
             const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);

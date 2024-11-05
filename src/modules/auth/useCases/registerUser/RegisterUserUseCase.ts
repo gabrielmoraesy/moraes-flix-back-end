@@ -1,16 +1,16 @@
-import { IAuthenticateUserDTO } from "../../dtos/IAuthenticateUserDTO";
 import bcrypt from "bcryptjs";
 import { inject, injectable } from "tsyringe";
-import { IUsersRepository } from "../../repositories/IUsersRepository.ts";
+import { AuthenticateUserDTO } from "../../dtos/AuthenticateUserDTO.js";
+import { IUsersRepository } from "../../infra/prisma/repositories/IUsersRepository.js";
 
 @injectable()
 class RegisterUserUseCase {
     constructor(
-        @inject("UsersRepositoryInMemory")
+        @inject("PrismaUsersRepository")
         private authenticateRepository: IUsersRepository,
     ) { }
 
-    async execute({ email, password, name }: IAuthenticateUserDTO): Promise<void> {
+    async execute({ email, password, name }: AuthenticateUserDTO): Promise<void> {
         const userAlreadyExists = await this.authenticateRepository.findByEmail(email);
 
         if (userAlreadyExists) {

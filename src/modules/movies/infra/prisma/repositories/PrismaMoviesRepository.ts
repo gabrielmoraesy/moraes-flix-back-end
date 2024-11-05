@@ -1,10 +1,14 @@
 import { Movie, PrismaClient } from "@prisma/client";
-import { IMoviesRepository } from "../IMoviesRepository";
-import { IUpdateMovie, IUpdateMovieDTO } from "../../dtos/IUpdateMovieDTO";
+import { IMoviesRepository } from "./IMoviesRepository";
+import { UpdateMovie, UpdateMovieDTO } from "../../../dtos/UpdateMovieDTO";
+import { inject, injectable } from "tsyringe";
 
-const prisma = new PrismaClient();
+@injectable()
+class PrismaMoviesRepository implements IMoviesRepository {
+    constructor(
+        @inject(PrismaClient) private prisma: PrismaClient
+    ) { }
 
-class MoviesRepositoryInMemory implements IMoviesRepository {
     async create({
         title,
         description,
@@ -12,8 +16,8 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
         releaseYear,
         duration,
         userId,
-    }: ICreateMovieDTO): Promise<Movie> {
-        const movie = await prisma.movie.create({
+    }: CreateMovieDTO): Promise<Movie> {
+        const movie = await this.prisma.movie.create({
             data: {
                 title,
                 description,
@@ -28,7 +32,7 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
     }
 
     async delete(id: string): Promise<Movie> {
-        const movie = await prisma.movie.delete({
+        const movie = await this.prisma.movie.delete({
             where: { id },
         });
 
@@ -36,7 +40,7 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
     }
 
     async findMany(): Promise<Movie[]> {
-        const movies = await prisma.movie.findMany({
+        const movies = await this.prisma.movie.findMany({
             include: {
                 reviews: true,
                 user: {
@@ -52,7 +56,7 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
     }
 
     async findById(movieId: string): Promise<Movie | null> {
-        const movie = await prisma.movie.findUnique({
+        const movie = await this.prisma.movie.findUnique({
             where: {
                 id: movieId
             },
@@ -81,17 +85,18 @@ class MoviesRepositoryInMemory implements IMoviesRepository {
     }
 
 
-    async update(movieId: string, updatedMovie: IUpdateMovieDTO): Promise<Movie> {
-        const movie = await prisma.movie.update({
+    async update(movieId: string, updatedMovie: UpdateMovieDTO): Promise<Movie> {
+        const movie = await this.prisma.movie.update({
             where: { id: movieId },
             data: {
                 ...updatedMovie,
                 updatedAt: new Date(),
-            } as IUpdateMovie,
+            } as UpdateMovie,
         });
 
         return movie;
     }
 }
 
-export { MoviesRepositoryInMemory };
+export { PrismaMoviesRepository };
+

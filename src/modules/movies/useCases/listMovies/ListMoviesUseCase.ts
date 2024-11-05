@@ -1,11 +1,11 @@
 import { inject, injectable } from "tsyringe";
-import { IMoviesRepository } from "../../repositories/IMoviesRepository";
+import { IMoviesRepository } from "../../infra/prisma/repositories/IMoviesRepository";
 import { Movie } from "@prisma/client";
 
 @injectable()
 class ListMoviesUseCase {
     constructor(
-        @inject("MoviesRepositoryInMemory")
+        @inject("PrismaMoviesRepository")
         private moviesRepository: IMoviesRepository,
     ) { }
 

@@ -1,11 +1,15 @@
-// Importações
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { DeleteReviewUseCase } from "./DeleteReviewUseCase";
+import { z } from "zod";
 
 class DeleteReviewController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { reviewId } = request.params
+        const createParamsReviewSchema = z.object({
+            reviewId: z.string()
+        })
+
+        const { reviewId } = createParamsReviewSchema.parse(request.params);
 
         const deleteReviewUseCase = container.resolve(DeleteReviewUseCase);
 
