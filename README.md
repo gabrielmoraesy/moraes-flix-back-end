@@ -1,59 +1,90 @@
-# Biblioteca de Filmes
+<p align="center">
+  <h1>🎬 MoraesFlix ⭐</h1>
+</p>
 
-Este projeto é uma aplicação de gerenciamento de filmes que permite aos usuários adicionar, editar, listar e avaliar filmes. O sistema oferece recomendações personalizadas com base nas avaliações dos usuários e fornece funcionalidades de pesquisa e filtragem.
+## Description
 
-## Funcionalidades
+O MoraesFlix é uma aplicação de gerenciamento de filmes, permitindo que os usuários adicionem, editem e excluam seus filmes favoritos, além de deixarem avaliações. O projeto foi desenvolvido com tecnologias modernas:
 
-- **CRUD de Filmes**: Adicionar, editar, listar e remover filmes na biblioteca.
-- **Avaliações de Filmes**: Usuários podem avaliar filmes de 1 a 5 estrelas.
-- **Recomendações**: Recomendações baseadas em avaliações semelhantes feitas por outros usuários.
-- **Autenticação de Usuários**: Usuários devem se cadastrar e fazer login para acessar e avaliar os filmes.
-- **Pesquisa e Filtragem**: Usuários podem pesquisar por filmes específicos e filtrar por gênero, ano, etc.
+## Tecnologias usadas:
+- **Front-end**: React e Tailwind CSS  
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
 
-## Requisitos Funcionais
+- **Back-end**: Node.js  
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js" />
 
-1. **Cadastro e Login de Usuários**:
-   - Usuários devem ser capazes de se cadastrar.
-   - Usuários devem ser capazes de fazer login com autenticação via JWT.
+- **Framework**: Express  
+  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white" alt="Express" />
 
-2. **CRUD de Filmes**:
-   - Os usuários podem adicionar filmes com os seguintes campos:
-     - Título do filme
-     - Descrição
-     - Gênero
-     - Ano de lançamento
-     - Duração
-   - Os usuários podem editar informações de filmes existentes.
-   - Os usuários podem listar todos os filmes cadastrados.
-   - Os usuários podem remover filmes da biblioteca.
+- **Banco de Dados**: Prisma e PostgreSQL  
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white" alt="Prisma" />
 
-3. **CRUD de Avaliações**:
-   - Os usuários podem avaliar filmes com uma nota de 1 a 5 estrelas.
-   - Os usuários podem deixar um comentário opcional sobre a avaliação.
+- **Validações**: Zod e React Hook Form  
+  <img src="https://img.shields.io/badge/Zod-2F8F4F?style=flat-square&logo=zod&logoColor=white" alt="Zod" />
+  <img src="https://img.shields.io/badge/React%20Hook%20Form-EC5990?style=flat-square&logo=react-hook-form&logoColor=white" alt="React Hook Form" />
 
-4. **Recomendações**:
-   - O sistema deve listar filmes que foram bem avaliados por outros usuários com perfis de avaliação semelhantes.
+- **Requisições HTTP**: Axios  
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white" alt="Axios" />
 
-5. **Pesquisa e Filtragem**:
-   - Os usuários podem pesquisar filmes por título.
-   - Os usuários podem filtrar filmes por gênero, ano e outros critérios.
+- **Containerização**: Docker  
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
 
-## Regras de Negócio
+Com uma interface amigável, o MoraesFlix facilita a gestão de suas coleções de filmes e avaliações.
 
-- As avaliações dos filmes devem ser associadas ao usuário que as criou.
-- Usuários não podem avaliar o mesmo filme mais de uma vez.
-- O sistema deve garantir que as recomendações sejam baseadas em um algoritmo que analisa as avaliações dos usuários e a similaridade dos perfis.
-- Apenas usuários autenticados podem adicionar, editar ou remover filmes e avaliações.
+## Installation
 
-## Requisitos Não Funcionais
+```bash
+$ npm install
+```
 
-- **Segurança**: O sistema deve usar autenticação JWT para proteger rotas sensíveis.
-- **Desempenho**: As respostas do servidor devem ser rápidas, com tempo de resposta inferior a 2 segundos para operações CRUD.
-- **Escalabilidade**: O sistema deve ser capaz de lidar com um aumento no número de usuários e filmes sem degradação do desempenho.
-- **Usabilidade**: A interface do usuário deve ser intuitiva e fácil de navegar, permitindo que os usuários realizem operações sem dificuldade.
-- **Documentação**: O código deve ser bem documentado, e o sistema deve incluir uma documentação do API clara.
+## Create database
 
-## Instalação
+```bash
+$ docker compose up -d
+```
 
-1. Clone o repositório:
-   
+## Generate Prisma Client
+
+```bash
+$ npm run db:generate
+```
+
+## Run Database Migrations
+
+```bash
+$ npx prisma migrate deploy
+```
+
+## Running the app
+
+```bash
+$ npm run dev
+```
+
+## Features
+
+### Autenticação JWT
+
+- [x] O sistema deve ser capaz de cadastrar usuários usando nome, e-mail e senha;
+- [x] O sistema deve ser capaz de autenticar usuários usando e-mail e senha;
+
+### Filmes
+
+- [x] O sistema deve permitir adicionar novos filmes à biblioteca;
+- [x] O sistema deve permitir listar todos os filmes da biblioteca;
+- [x] O sistema deve permitir exibir detalhes de um filme específico;
+- [x] O sistema deve permitir atualizar as informações de um filme;
+- [x] O sistema deve permitir remover filmes da biblioteca;
+- [x] O sistema deve gerar recomendações de filmes com base nas avaliações de filmes feitas por outros usuários;
+- [x] O sistema deve permitir pesquisar por filmes específicos;
+- [x] O sistema deve permitir filtrar filmes por gênero, ano e duração.
+
+### Avaliações
+
+- [x] O sistema deve permitir que usuários avaliem filmes de 1 a 5 estrelas;
+- [x] O sistema deve permitir listar todos as avaliações dos filmes;
+- [x] O sistema deve permitir atualizar as avaliações;
+- [x] O sistema deve permitir remover as avaliações;
+- [x] O sistema deve permitir exibir a média das avaliações de um filme.
