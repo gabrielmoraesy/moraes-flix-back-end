@@ -2,10 +2,13 @@
   "name": "moraes-flix-back-end",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
-    "start:dev": "tsx watch src/shared/server.ts",
-    "start": "node build/shared/server.js",
-    "build": "tsup src --out-dir build"
+    "dev": "tsx watch src/shared/server.ts",
+    "build": "tsup src --out-dir build",
+    "start": "node build/shared/server.js"
   },
   "keywords": [],
   "author": "",
