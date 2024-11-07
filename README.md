@@ -48,7 +48,7 @@ $ docker compose up -d
 ## Generate Prisma Client
 
 ```bash
-$ npm run db:generate
+$ npx prisma generate
 ```
 
 ## Run Database Migrations
