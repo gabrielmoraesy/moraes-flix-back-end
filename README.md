@@ -39,6 +39,13 @@ Com uma interface amigável, o MoraesFlix facilita a gestão de suas coleções 
 $ npm install
 ```
 
+## Create .env file and paste paste inside it
+
+```bash
+$ DATABASE_URL="postgresql://docker:moraesflix@localhost:5432/database_moraes_flix?schema=public"
+$ JWT_SECRET="your_jwt_secret"
+```
+
 ## Create database
 
 ```bash
