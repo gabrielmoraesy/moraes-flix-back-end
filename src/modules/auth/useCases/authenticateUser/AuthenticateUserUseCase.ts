@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { IUsersRepository } from "../../infra/prisma/repositories/IUsersRepository.js";
+import { IUsersRepository } from "@/modules/auth/repositories/IUsersRepository.js";
 import { LoginUserDTO } from "../../dtos/LoginUserDTO.js";
 
 @injectable()

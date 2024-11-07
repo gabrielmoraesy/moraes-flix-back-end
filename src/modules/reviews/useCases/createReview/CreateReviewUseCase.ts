@@ -1,7 +1,7 @@
 import { Review } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { CreateReviewDTO } from "../../dtos/CreateReviewDTO";
-import { IReviewsRepository } from "../../infra/prisma/repositories/IReviewsRepository";
+import { IReviewsRepository } from "@/modules/reviews/repositories/IReviewsRepository";
 
 @injectable()
 class CreateReviewUseCase {

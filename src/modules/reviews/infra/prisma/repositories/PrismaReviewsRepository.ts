@@ -1,8 +1,8 @@
 import { PrismaClient, Review } from "@prisma/client";
-import { IReviewsRepository } from "./IReviewsRepository";
 import { CreateReviewDTO } from "@/modules/reviews/dtos/CreateReviewDTO";
 import { UpdateReviewDTO } from "@/modules/reviews/dtos/UpdateReviewDTO";
 import { inject, injectable } from "tsyringe";
+import { IReviewsRepository } from "@/modules/reviews/repositories/IReviewsRepository";
 
 @injectable()
 class PrismaReviewsRepository implements IReviewsRepository {

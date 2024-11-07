@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { IMoviesRepository } from "../../infra/prisma/repositories/IMoviesRepository";
+import { IMoviesRepository } from "@/modules/movies/repositories/IMoviesRepository";
 import { Movie } from "@prisma/client";
 
 interface IRequest {

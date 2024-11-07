@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { AuthenticateUserDTO } from "../../dtos/AuthenticateUserDTO.js";
-import { IUsersRepository } from "../../infra/prisma/repositories/IUsersRepository.js";
+import { IUsersRepository } from "@/modules/auth/repositories/IUsersRepository.js";
 
 @injectable()
 class RegisterUserUseCase {

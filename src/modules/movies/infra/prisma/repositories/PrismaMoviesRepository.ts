@@ -1,7 +1,7 @@
 import { Movie, PrismaClient } from "@prisma/client";
-import { IMoviesRepository } from "./IMoviesRepository";
 import { UpdateMovie, UpdateMovieDTO } from "../../../dtos/UpdateMovieDTO";
 import { inject, injectable } from "tsyringe";
+import { IMoviesRepository } from "@/modules/movies/repositories/IMoviesRepository";
 
 @injectable()
 class PrismaMoviesRepository implements IMoviesRepository {
@@ -32,6 +32,12 @@ class PrismaMoviesRepository implements IMoviesRepository {
     }
 
     async delete(id: string): Promise<Movie> {
+        await this.prisma.review.deleteMany({
+            where: {
+                movieId: id,
+            },
+        });
+
         const movie = await this.prisma.movie.delete({
             where: { id },
         });

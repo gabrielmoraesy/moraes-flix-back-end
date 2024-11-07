@@ -1,10 +1,10 @@
-import { IUsersRepository } from "@/modules/auth/infra/prisma/repositories/IUsersRepository";
+import { IUsersRepository } from "@/modules/auth/repositories/IUsersRepository.js";
 import { PrismaMoviesRepository } from "@/modules/movies/infra/prisma/repositories/PrismaMoviesRepository";
-import { IMoviesRepository } from "@/modules/movies/infra/prisma/repositories/IMoviesRepository";
+import { IMoviesRepository } from "@/modules/movies/repositories/IMoviesRepository";
 import { container } from "tsyringe";
 import { PrismaUsersRepository } from "@/modules/auth/infra/prisma/repositories/PrismaUsersRepository";
 import { PrismaReviewsRepository } from "@/modules/reviews/infra/prisma/repositories/PrismaReviewsRepository";
-import { IReviewsRepository } from "@/modules/reviews/infra/prisma/repositories/IReviewsRepository";
+import { IReviewsRepository } from "@/modules/reviews/repositories/IReviewsRepository";
 import { PrismaClient } from "@prisma/client";
 import { prisma } from "../infra/http/PrismaClient";
 

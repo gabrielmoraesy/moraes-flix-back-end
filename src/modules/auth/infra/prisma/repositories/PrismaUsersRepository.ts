@@ -1,8 +1,7 @@
 import { PrismaClient, User } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { AuthenticateUserDTO } from "../../../dtos/AuthenticateUserDTO.js";
-import { IUsersRepository } from "./IUsersRepository.js";
-
+import { IUsersRepository } from "@/modules/auth/repositories/IUsersRepository.js";
 @injectable()
 class PrismaUsersRepository implements IUsersRepository {
     constructor(

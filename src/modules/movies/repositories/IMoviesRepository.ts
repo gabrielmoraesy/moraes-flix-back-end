@@ -1,5 +1,6 @@
 import { Movie } from "@prisma/client";
-import { UpdateMovieDTO } from "../../../dtos/UpdateMovieDTO";
+import { UpdateMovieDTO } from "../dtos/UpdateMovieDTO";
+
 interface IMoviesRepository {
     create(data: CreateMovieDTO): Promise<Movie>;
     delete(movieId: string): Promise<Movie>;
